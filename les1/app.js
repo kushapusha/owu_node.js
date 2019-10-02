@@ -1,4 +1,4 @@
-let {CreateGroup, CreateStudent, AddingPhoto} = require('./students');
+const {CreateGroup, CreateStudent, AddingPhoto} = require('./students');
 
 
 
