@@ -6,13 +6,13 @@
 const fs = require('fs');
 
 
-exports.CreateGroup = function (groupFolder) {
+exports.CreateGroup = groupFolder => {
     fs.mkdir(`./${groupFolder}`, err => {
         if (!err) {
         console.log(`Group ${groupFolder} was created`)}
     })}
 
-exports.CreateStudent = function (group, student, info) {
+exports.CreateStudent = (group, student, info) => {
     fs.mkdir(`./${group}/${student}`, err => {
         if (!err) {
         console.log(`Folder for ${student} was created`)}
@@ -24,7 +24,7 @@ exports.CreateStudent = function (group, student, info) {
     })
 }
 
-exports.AddingPhoto = function (wreheTo, whereFrom) {
+exports.AddingPhoto = (wreheTo, whereFrom) => {
     fs.createReadStream(whereFrom).pipe(fs.createWriteStream(wreheTo));
     console.log('You just added the photo, thanks')
 }
