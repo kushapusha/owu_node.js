@@ -34,9 +34,9 @@ app.get('/house', (req, res) => {
 
 
 app.post('/regist', (req, res) => {
-    let body = req.body;
-    body.id = users.length + 1;
-    users.push(body);
+    let user = req.body;
+    user.id = users.length + 1;
+    users.push(user);
     res.render('regist', {layout: false});
 });
 
@@ -45,21 +45,25 @@ app.get('/user/:id', (req,res) => {
     res.json(ThisUser);
 });
 
-app.post('/login', (req, res) => {
-    let body = req.body;
-    let CurUser = users.find(user => user.email === body.email && user.password === body.password);
-    CurUser ? res.json(CurUser) : res.redirect('regist')
-});
 
 app.post('/house', (req, res) => {
-    let body = req.body;
-    body.id = houses.length + 1;
-    houses.push(body);
+    let house = req.body;
+    house.id = houses.length + 1;
+    houses.push(house);
     res.render('house', {layout: false});
 });
 app.get('/house/:id', (req,res) => {
     let ThisHouse = houses.find(house => +req.params.id === house.id);
     res.json(ThisHouse);
+});
+
+app.post('/login', (req, res) => {
+    let body = req.body;
+    users.forEach(user => {
+        if (user.email === body.email && user.password === body.password) {
+            let MyHome = houses.find(house => house.id === user.id)
+            res.json(MyHome)}
+    })
 });
 
 
