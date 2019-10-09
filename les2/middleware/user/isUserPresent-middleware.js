@@ -10,7 +10,7 @@ module.exports = async (req, res, next) => {
             return res.redirect('/regist');
         }
 
-        [req.user] = ThisUser;
+        req.user = ThisUser;
         next();
     } catch (e) {
        res.status(400).json(e.message)
