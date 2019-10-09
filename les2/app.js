@@ -5,68 +5,47 @@ const path = require('path');
 const app = express();
 app.listen(3000, ()=>{});
 
-const users = [];
-const houses = [];
 
 app.use(express.static(path.join(__dirname, 'static')));
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
 app.engine('.hbs', handlebar({
-    extname: '.hbs'
+    extname: '.hbs',
+    defaultLayout: null
 }));
 app.set('view engine', '.hbs');
 app.set('views', path.join(__dirname, 'static'));
 
 
-app.get('/', (req, res) => {
-    res.render('main', {layout: false})
-});
-app.get('/login', (req, res) => {
-    res.render('login', {layout: false})
-});
-app.get('/regist', (req, res) => {
-    res.render('regist', {layout: false})
-});
-app.get('/house', (req, res) => {
-    res.render('house', {layout: false})
-});
+let { user, house, workPages } = require('./controllers');
+let { userMiddleware, houseMiddleware } = require('./middleware');
 
 
-app.post('/regist', (req, res) => {
-    let user = req.body;
-    user.id = users.length + 1;
-    users.push(user);
-    res.render('regist', {layout: false});
-});
-
-app.get('/user/:id', (req,res) => {
-    let ThisUser = users.find(user => +req.params.id === user.id);
-    res.json(ThisUser);
-});
+app.get('/', workPages.mainPage);
+app.get('/login', workPages.loginPage);
+app.get('/regist', workPages.registPage);
+app.get('/house', workPages.housePage);
+app.get('/userUpdate', workPages.userUpdatingPage);
+app.get('/houseUpdate', workPages.houseUpdatingPage);
 
 
-app.post('/house', (req, res) => {
-    let house = req.body;
-    house.id = houses.length + 1;
-    houses.push(house);
-    res.render('house', {layout: false});
-});
-app.get('/house/:id', (req,res) => {
-    let ThisHouse = houses.find(house => +req.params.id === house.id);
-    res.json(ThisHouse);
-});
+app.post('/registUser', userMiddleware.checkUserValidMiddleware, user.createUser);
+app.get('/users/:id', userMiddleware.isUserPresentMiddleware, user.getByID);
+app.get('/users', user.findAll);
+app.post('/loginUser', userMiddleware.findUserLogMiddleware, user.loginUser);
+app.post('/updateUser', userMiddleware.checkUserValidMiddleware, userMiddleware.isIDinDbPresentMiddleware, user.updateUser);
 
-app.post('/login', (req, res) => {
-    let body = req.body;
-    users.forEach(user => {
-        if (user.email === body.email && user.password === body.password) {
-            let MyHome = houses.find(house => house.id === user.id)
-            res.json(MyHome)}
-    })
-});
+
+
+app.post('/registHouse', houseMiddleware.checkHouseValidMiddleware, house.createHouse);
+app.get('/houses/:id', houseMiddleware.isHousePresentMiddleware, house.getByID);
+app.get('/houses', house.findAll);
+app.post('/loginHouse', houseMiddleware.findHouseLogMiddleware, house.loginHouse);
+app.post('/updateHouse', houseMiddleware.checkHouseValidMiddleware, houseMiddleware.isHouseIdInDbPresentMiddleware, house.updateHouse);
+
 
 
 app.all('*', (req, res)  => {
-    res.render('404', {layout: false});
+    res.render('404');
 });
