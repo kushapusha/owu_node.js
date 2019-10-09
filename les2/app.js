@@ -32,7 +32,7 @@ app.get('/houseUpdate', workPages.houseUpdatingPage);
 
 app.post('/registUser', userMiddleware.checkUserValidMiddleware, user.createUser);
 app.get('/users/:id', userMiddleware.isUserPresentMiddleware, user.getByID);
-app.get('/users', user.findAll);
+app.get('/users', userMiddleware.findAllUsersMiddleware ,user.findAll);
 app.post('/loginUser', userMiddleware.findUserLogMiddleware, user.loginUser);
 app.post('/updateUser', userMiddleware.checkUserValidMiddleware, userMiddleware.isIDinDbPresentMiddleware, user.updateUser);
 
@@ -40,7 +40,7 @@ app.post('/updateUser', userMiddleware.checkUserValidMiddleware, userMiddleware.
 
 app.post('/registHouse', houseMiddleware.checkHouseValidMiddleware, house.createHouse);
 app.get('/houses/:id', houseMiddleware.isHousePresentMiddleware, house.getByID);
-app.get('/houses', house.findAll);
+app.get('/houses', houseMiddleware.findAllHousesMiddleware,house.findAll);
 app.post('/loginHouse', houseMiddleware.findHouseLogMiddleware, house.loginHouse);
 app.post('/updateHouse', houseMiddleware.checkHouseValidMiddleware, houseMiddleware.isHouseIdInDbPresentMiddleware, house.updateHouse);
 
