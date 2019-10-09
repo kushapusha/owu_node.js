@@ -10,7 +10,7 @@ module.exports = async (req, res, next) => {
             return res.redirect('/house');
         }
 
-        [req.house] = ThisHouse;
+        req.house = ThisHouse;
         next();
     } catch (e) {
         res.status(400).json(e.message)
