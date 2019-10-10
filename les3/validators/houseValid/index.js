@@ -1,1 +1,0 @@
-module.exports.newHouseValid = require('./newHouseValid');
