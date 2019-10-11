@@ -19,27 +19,23 @@ app.engine('.hbs', handlebar({
 app.set('view engine', '.hbs');
 app.set('views', path.join(__dirname, 'static'));
 
-const { user, house, workPages } = require('./controllers');
-const { userMiddleware, houseMiddleware } = require('./middleware');
+const { workPages } = require('./controllers');
 const { userRouter, houseRouter } = require('./router');
 
 app.get('/', workPages.mainPage);
-app.get('/login', workPages.loginPage);
-app.get('/regist', workPages.registPage);
-app.get('/house', workPages.housePage);
-app.get('/userUpdate', workPages.userUpdatingPage);
-app.get('/houseUpdate', workPages.houseUpdatingPage);
-
+app.get('/auth', workPages.loginPage);
+app.get('/users_register', workPages.registPage);
+app.get('/houses_register', workPages.housePage);
+app.get('/users_update', workPages.userUpdatingPage);
+app.get('/houses_update', workPages.houseUpdatingPage);
 
 app.use('/users', userRouter);
-app.post('/loginUser', userMiddleware.findUserLogMiddleware, user.loginUser);
-app.post('/updateUser', userMiddleware.isIDinDbPresentMiddleware, user.updateUser);
-
+app.use('/users_auth', userRouter);
+app.use('/users_update', userRouter);
 
 app.use('/houses', houseRouter);
-app.post('/loginHouse', houseMiddleware.findHouseLogMiddleware, house.loginHouse);
-app.post('/updateHouse', houseMiddleware.isHouseIdInDbPresentMiddleware, house.updateHouse);
-
+app.use('/houses_auth', houseRouter);
+app.use('/houses_update', houseRouter);
 
 app.all('*', (req, res)  => {
     res.render('404');
