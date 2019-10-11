@@ -1,17 +1,21 @@
 const db = require('../../database').getInstance();
 
 module.exports = async (req, res) => {
-    const {id, city, street, rooms} = req.body;
-    const HouseModel = db.getModel('House');
+    try {
+        const {id, city, street, rooms} = req.body;
+        const HouseModel = db.getModel('House');
 
-    await HouseModel.update(
-        {city: `${city}`,
-        street: `${street}`,
-        rooms: `${rooms}`},
-        {where: {
-            id: id}
-        }
-    );
+        await HouseModel.update(
+            {city: `${city}`,
+                street: `${street}`,
+                rooms: `${rooms}`},
+            {where: {
+                    id: id}
+            }
+        );
 
-    res.redirect('/houses_update');
+        res.redirect('/houses_update');
+    } catch (e) {
+        res.status(400).json(e.message)
+    }
 };
