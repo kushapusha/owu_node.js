@@ -1,13 +1,13 @@
-const {provider} = require('../../database');
+const db = require('../../database').getInstance();
 
 module.exports = async (req, res, next) => {
     try {
         const {id} = req.body;
-        const query = `select * from users where id = ${id}`;
+        const UserModel = db.getModel('User');
 
-        const [UserID] = await provider.promise().query(query);
+        let UserID = await UserModel.findByPk(id);
 
-        if (!UserID.length) {
+        if (!UserID) {
             throw new Error('No user with this ID');
         }
 

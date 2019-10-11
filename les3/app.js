@@ -33,12 +33,12 @@ app.get('/houseUpdate', workPages.houseUpdatingPage);
 
 app.use('/users', userRouter);
 app.post('/loginUser', userMiddleware.findUserLogMiddleware, user.loginUser);
-app.post('/updateUser', userMiddleware.checkUserValidMiddleware, userMiddleware.isIDinDbPresentMiddleware, user.updateUser);
+app.post('/updateUser', userMiddleware.isIDinDbPresentMiddleware, user.updateUser);
 
 
 app.use('/houses', houseRouter);
 app.post('/loginHouse', houseMiddleware.findHouseLogMiddleware, house.loginHouse);
-app.post('/updateHouse', houseMiddleware.checkHouseValidMiddleware, houseMiddleware.isHouseIdInDbPresentMiddleware, house.updateHouse);
+app.post('/updateHouse', houseMiddleware.isHouseIdInDbPresentMiddleware, house.updateHouse);
 
 
 app.all('*', (req, res)  => {

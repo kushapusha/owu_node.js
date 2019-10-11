@@ -1,13 +1,13 @@
-const {provider} = require('../../database');
+const db = require('../../database').getInstance();
 
 module.exports = async (req, res, next) => {
     try {
         const {id} = req.body;
-        const query = `select * from house where id = ${id}`;
+        const HouseModel = db.getModel('House');
 
-        const [HouseID] = await provider.promise().query(query);
+        let HouseID = await  HouseModel.findByPk(id);
 
-        if (!HouseID.length) {
+        if (!HouseID) {
             throw new Error('No house with this ID');
         }
 

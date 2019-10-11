@@ -1,11 +1,17 @@
-const { provider } = require('../../database');
+const db = require('../../database').getInstance();
 
 module.exports = async (req, res) => {
-
     const {id, city, street, rooms} = req.body;
-    const query = `update house set city = '${city}', street = '${street}', rooms = '${rooms}' where id = ${id}`;
+    const HouseModel = db.getModel('House');
 
-    await provider.promise().query(query);
+    await HouseModel.update(
+        {city: `${city}`,
+        street: `${street}`,
+        rooms: `${rooms}`},
+        {where: {
+            id: id}
+        }
+    );
 
     res.redirect('/houseUpdate');
 };

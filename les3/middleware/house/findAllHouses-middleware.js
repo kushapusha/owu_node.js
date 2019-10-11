@@ -1,12 +1,12 @@
-const { provider } = require('../../database');
+const db = require('../../database').getInstance();
 
 module.exports = async (req, res, next) => {
     try {
-        const query = `select * from house`;
+        const HouseModel = db.getModel('House');
 
-        const [AllHouses] = await provider.promise().query(query);
+        const AllHouses = await HouseModel.findAll();
 
-        if (!AllHouses.length) {
+        if (!AllHouses) {
             return res.redirect('/house');
         }
 

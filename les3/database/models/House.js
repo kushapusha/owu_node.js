@@ -14,12 +14,19 @@ module.exports = (sequelize, DataTypes) => {
         },
         rooms: {
             type: DataTypes.INTEGER,
-            allowNull: false,
+            allowNull: false
+        },
+        users_id: {
+            type: DataTypes.INTEGER,
+            foreignKey: true
         }
     }, {
         tableName:'house',
         timestamps: false
     });
+
+    const User = sequelize.import('./User.js');
+    House.belongsTo(User, {foreignKey: 'user_id'});
 
     return House;
 };

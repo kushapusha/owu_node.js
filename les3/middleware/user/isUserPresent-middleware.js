@@ -5,9 +5,9 @@ module.exports = async (req, res, next) => {
         const {id} = req.params;
         const UserModel = db.getModel('User');
 
-        let ThisUser = await  UserModel.findByPk(id);
+        let ThisUser = await UserModel.findByPk(id);
 
-        if (!ThisUser.length) {
+        if (!ThisUser) {
             return res.redirect('/regist');
         }
 

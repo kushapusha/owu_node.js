@@ -1,12 +1,18 @@
-const { provider } = require('../../database');
+const db = require('../../database').getInstance();
 
 module.exports = async (req, res ,next) => {
     try {
         const {email, password} = req.body;
-        const query = `select * from users where email = '${email}' and password = '${password}'`;
-        const [LoginUser] = await provider.promise().query(query);
+        const UserModel = db.getModel('User');
 
-        if (!LoginUser.length) {
+        const LoginUser = await UserModel.findOne(
+            {where: {
+                email: `${email}`,
+                password: `${password}`
+            }
+        });
+
+        if (!LoginUser) {
             return res.redirect('/regist');
         }
 

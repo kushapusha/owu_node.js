@@ -1,12 +1,12 @@
-const { provider } = require('../../database');
+const db = require('../../database').getInstance();
 
 module.exports = async (req, res, next) => {
     try {
-        const query = `select * from users`;
+        const UserModel = db.getModel('User');
 
-        const [AllUsers] = await provider.promise().query(query);
+        const AllUsers = await UserModel.findAll();
 
-        if (!AllUsers.length) {
+        if (!AllUsers) {
             return res.redirect('/regist');
         }
 

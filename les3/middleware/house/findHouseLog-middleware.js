@@ -1,13 +1,16 @@
-const { provider } = require('../../database');
+const db = require('../../database').getInstance();
 
 module.exports = async (req, res , next) => {
     try {
         const {street} = req.body;
-        const query = `select * from house where street = '${street}'`;
+        const HouseModel = db.getModel('House');
 
-        const [LoginHouse] = await provider.promise().query(query);
+        const LoginHouse = await HouseModel.findOne(
+            {where:
+                {street: `${street}`}
+        });
 
-        if (!LoginHouse.length) {
+        if (!LoginHouse) {
             return res.redirect('/house');
         }
 

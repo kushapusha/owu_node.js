@@ -1,11 +1,16 @@
-const { provider } = require('../../database');
+const db = require('../../database').getInstance();
 
 module.exports = async (req, res) => {
-
     const {id, name, email, password} = req.body;
-    const query = `update users set name = '${name}', email = '${email}', password = '${password}' where id = ${id}`;
+    const UserModel = db.getModel('User');
 
-    await provider.promise().query(query);
+    await UserModel.update(
+        {name: `${name}`,
+        email: `${email}`,
+        password: `${password}`},
+        {where:
+             {id: id}}
+    );
 
     res.redirect('/userUpdate');
 };
