@@ -13,5 +13,5 @@ module.exports = async (req, res) => {
         }
     );
 
-    res.redirect('/houseUpdate');
+    res.redirect('/houses_update');
 };

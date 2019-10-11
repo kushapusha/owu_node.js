@@ -12,7 +12,7 @@ module.exports = async (req, res) => {
              {id: id}}
     );
 
-    res.redirect('/userUpdate');
+    res.redirect('/users_update');
 };
 
 

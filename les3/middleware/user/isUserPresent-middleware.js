@@ -8,7 +8,7 @@ module.exports = async (req, res, next) => {
         let ThisUser = await UserModel.findByPk(id);
 
         if (!ThisUser) {
-            return res.redirect('/regist');
+            return res.redirect('/users_register');
         }
 
         req.user = ThisUser;

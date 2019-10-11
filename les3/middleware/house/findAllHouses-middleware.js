@@ -7,7 +7,7 @@ module.exports = async (req, res, next) => {
         const AllHouses = await HouseModel.findAll();
 
         if (!AllHouses) {
-            return res.redirect('/house');
+            return res.redirect('/houses_register');
         }
 
         req.house = AllHouses;

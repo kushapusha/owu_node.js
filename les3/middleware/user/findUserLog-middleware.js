@@ -13,7 +13,7 @@ module.exports = async (req, res ,next) => {
         });
 
         if (!LoginUser) {
-            return res.redirect('/regist');
+            return res.redirect('/users_register');
         }
 
         req.user = LoginUser;

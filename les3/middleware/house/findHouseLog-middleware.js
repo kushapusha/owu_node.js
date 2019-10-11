@@ -11,7 +11,7 @@ module.exports = async (req, res , next) => {
         });
 
         if (!LoginHouse) {
-            return res.redirect('/house');
+            return res.redirect('/houses_register');
         }
 
         req.house = LoginHouse;

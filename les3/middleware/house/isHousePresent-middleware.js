@@ -8,7 +8,7 @@ module.exports = async (req, res, next) => {
         let ThisHouse = await  HouseModel.findByPk(id);
 
         if (!ThisHouse) {
-            return res.redirect('/house');
+            return res.redirect('/houses_register');
         }
 
         req.house = ThisHouse;
