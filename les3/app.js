@@ -26,8 +26,6 @@ app.get('/', workPages.mainPage);
 app.get('/auth', workPages.loginPage);
 app.get('/users_register', workPages.registPage);
 app.get('/houses_register', workPages.housePage);
-app.get('/users_update', workPages.userUpdatingPage);
-app.get('/houses_update', workPages.houseUpdatingPage);
 
 app.use('/users', userRouter);
 app.use('/houses', houseRouter);

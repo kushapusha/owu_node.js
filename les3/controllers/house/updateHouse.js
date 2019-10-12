@@ -2,14 +2,15 @@ const db = require('../../database').getInstance();
 
 module.exports = async (req, res) => {
     try {
-        const {id, city, street, rooms} = req.body;
+        const {id} = req.params;
+        const HouseNew = req.body;
         const HouseModel = db.getModel('House');
 
-        await HouseModel.update({city, street, rooms},
+        await HouseModel.update(HouseNew,
             {where: {id}}
         );
 
-        res.redirect('/houses_update');
+        res.json('House was updated');
     } catch (e) {
         res.status(400).json(e.message)
     }
