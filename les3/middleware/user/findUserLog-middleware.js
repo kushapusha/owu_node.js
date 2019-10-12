@@ -6,13 +6,10 @@ module.exports = async (req, res ,next) => {
         const UserModel = db.getModel('User');
 
         const LoginUser = await UserModel.findOne(
-            {where: {
-                email: `${email}`,
-                password: `${password}`
-            }
+            {where: {email, password}
         });
 
-        if (!LoginUser) {
+        if (!LoginUser.length) {
             return res.redirect('/users_register');
         }
 

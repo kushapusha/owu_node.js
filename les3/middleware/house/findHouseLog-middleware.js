@@ -6,11 +6,10 @@ module.exports = async (req, res , next) => {
         const HouseModel = db.getModel('House');
 
         const LoginHouse = await HouseModel.findOne(
-            {where:
-                {street: `${street}`}
-        });
+            {where: {street}}
+        );
 
-        if (!LoginHouse) {
+        if (!LoginHouse.length) {
             return res.redirect('/houses_register');
         }
 

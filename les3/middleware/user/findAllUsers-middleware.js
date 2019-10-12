@@ -6,7 +6,7 @@ module.exports = async (req, res, next) => {
 
         const AllUsers = await UserModel.findAll();
 
-        if (!AllUsers) {
+        if (!AllUsers.length) {
             return res.redirect('/users_register');
         }
 

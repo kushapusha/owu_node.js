@@ -5,12 +5,8 @@ module.exports = async (req, res) => {
         const {id, name, email, password} = req.body;
         const UserModel = db.getModel('User');
 
-        await UserModel.update(
-            {name: `${name}`,
-                email: `${email}`,
-                password: `${password}`},
-            {where:
-                    {id: id}}
+        await UserModel.update({name, email, password},
+            {where: {id}}
         );
 
         res.redirect('/users_update');

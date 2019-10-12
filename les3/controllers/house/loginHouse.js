@@ -1,5 +1,5 @@
 module.exports = (req, res) => {
-    const house = req.house;
+    const {id} = req.house;
 
-    res.redirect(`/houses/${house.id}`);
+    res.redirect(`/houses/${id}`);
 };
