@@ -8,16 +8,26 @@ module.exports = (sequelize, DataTypes) => {
         },
         name: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: false,
+            validate: {
+                notEmpty: true,
+            }
         },
         email: {
             type: DataTypes.STRING,
             unique: true,
             allowNull: false,
+            validate: {
+                notEmpty: true,
+                isEmail: true,
+            }
         },
         password: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: false,
+            validate: {
+                notEmpty: true,
+            }
         }
     }, {
         tableName:'users',

@@ -7,5 +7,6 @@ router.post('/', user.createUser);
 router.get('/:id', userMiddleware.isUserPresentMiddleware, user.getByID);
 router.get('/', userMiddleware.findAllUsersMiddleware ,user.findAll);
 router.patch('/:id', userMiddleware.isIDinDbPresentMiddleware, user.updateUser);
+router.delete('/:id', user.deleteUser);
 
 module.exports = router;

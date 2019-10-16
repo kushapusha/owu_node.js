@@ -8,13 +8,23 @@ module.exports = (sequelize, DataTypes) => {
         },
         city: {
             type: DataTypes.STRING,
+            validate: {
+                notEmpty: true,
+            }
         },
         street: {
             type: DataTypes.STRING,
+            validate: {
+                notEmpty: true,
+            }
         },
         rooms: {
             type: DataTypes.INTEGER,
-            allowNull: false
+            allowNull: false,
+            validate: {
+                notEmpty: true,
+                isNumeric: true
+            }
         },
         users_id: {
             type: DataTypes.INTEGER,
