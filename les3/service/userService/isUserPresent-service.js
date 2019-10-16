@@ -1,9 +1,11 @@
 const  db = require('../../database').getInstance();
 
 module.exports = async id => {
-    const UserModel = db.getModel('User');
+    const UserModel = await db.getModel('User');
 
-    const ThisUser = await UserModel.findByPk(id);
+    const ThisUser = await UserModel.findByPk(id, {
+        attributes: ['id', 'name']
+    });
 
-    return ThisUser;
+    return ThisUser && ThisUser.dataValues;
 };

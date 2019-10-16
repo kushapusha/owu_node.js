@@ -1,5 +1,8 @@
-module.exports = (req, res) => {
-    const {id} = req.user;
+const {tokinazer} = require('../../helpers');
 
-    res.redirect(`/users/${id}`);
+module.exports = (req, res) => {
+    const user = req.user;
+    const tokens = tokinazer(user);
+
+    res.json(tokens);
 };

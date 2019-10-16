@@ -6,7 +6,7 @@ module.exports = async (req, res ,next) => {
 
         const LoginUser = await userService.findUserLogService(email, password);
 
-        if (!LoginUser.length) {
+        if (!LoginUser) {
             return res.redirect('/users_register');
         }
 

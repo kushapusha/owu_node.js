@@ -7,5 +7,5 @@ module.exports = async (email, password) => {
             where: {email, password}
         });
 
-    return LoginUser;
+    return LoginUser && LoginUser.dataValues
 };

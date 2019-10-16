@@ -31,9 +31,12 @@ module.exports = (sequelize, DataTypes) => {
             foreignKey: true
         }
     }, {
-        tableName:'house',
+        tableName: 'house',
         timestamps: false
     });
+
+    const User = sequelize.import('./User.js');
+    House.belongsTo(User, {foreignKey: 'users_id'});
 
     return House;
 };
