@@ -1,11 +1,10 @@
-const db = require('../../database').getInstance();
+const {houseService} = require('../../service');
 
 module.exports = async (req, res, next) => {
     try {
         const {id} = req.params;
-        const HouseModel = db.getModel('House');
 
-        let ThisHouse = await  HouseModel.findByPk(id);
+        const ThisHouse = await houseService.isHousePresentService(id);
 
         if (!ThisHouse) {
             return res.redirect('/houses_register');

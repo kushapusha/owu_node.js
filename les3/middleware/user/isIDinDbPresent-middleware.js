@@ -1,11 +1,10 @@
-const db = require('../../database').getInstance();
+const {userService} = require('../../service');
 
 module.exports = async (req, res, next) => {
     try {
         const {id} = req.params;
-        const UserModel = db.getModel('User');
 
-        let UserID = await UserModel.findByPk(id);
+        const UserID = await userService.isUserPresentService(id);
 
         if (!UserID) {
             throw new Error('No user with this ID');

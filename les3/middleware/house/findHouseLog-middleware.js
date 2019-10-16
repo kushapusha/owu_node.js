@@ -1,13 +1,10 @@
-const db = require('../../database').getInstance();
+const {houseService} = require('../../service');
 
 module.exports = async (req, res , next) => {
     try {
         const {street} = req.body;
-        const HouseModel = db.getModel('House');
 
-        const LoginHouse = await HouseModel.findOne(
-            {where: {street}}
-        );
+        const LoginHouse = await houseService.findHouseLogService(street);
 
         if (!LoginHouse.length) {
             return res.redirect('/houses_register');

@@ -1,13 +1,10 @@
-const db = require('../../database').getInstance();
+const {userService} = require('../../service');
 
 module.exports = async (req, res ,next) => {
     try {
         const {email, password} = req.body;
-        const UserModel = db.getModel('User');
 
-        const LoginUser = await UserModel.findOne(
-            {where: {email, password}
-        });
+        const LoginUser = await userService.findUserLogService(email, password);
 
         if (!LoginUser.length) {
             return res.redirect('/users_register');
