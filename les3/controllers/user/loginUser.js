@@ -1,8 +1,12 @@
 const {tokinazer} = require('../../helpers');
 
 module.exports = (req, res) => {
-    const user = req.user;
-    const tokens = tokinazer(user);
+    try {
+        const user = req.user;
+        const tokens = tokinazer(user);
 
-    res.json(tokens);
+        res.json(tokens);
+    } catch (e) {
+        res.json('BAD').status(403)
+    }
 };

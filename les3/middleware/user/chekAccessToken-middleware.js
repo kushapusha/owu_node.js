@@ -5,7 +5,7 @@ module.exports = (req, res, next) => {
         const token = req.get('Authorization');
 
         if (!token) {
-            throw  new Error('No token!!!')
+             throw new Error('No token!!!')
         }
 
         const userFromToken = tokenVerification(token);

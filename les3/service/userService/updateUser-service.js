@@ -4,6 +4,6 @@ module.exports = async (id, UserNew) => {
     const UserModel = db.getModel('User');
 
     await UserModel.update(UserNew,
-        {where: {id}}
+        {where: id}
     );
 };

@@ -12,4 +12,6 @@ module.exports = token => {
         user = decoded;
 
     });
+
+    return user;
 };

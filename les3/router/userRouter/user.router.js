@@ -10,7 +10,10 @@ router.patch('/:id',
     userMiddleware.isIDinDbPresentMiddleware,
     userMiddleware.chekAccessTokenMiddleware,
     user.updateUser);
-router.delete('/:id', user.deleteUser);
+router.delete('/:id',
+    userMiddleware.isIDinDbPresentMiddleware,
+    userMiddleware.chekAccessTokenMiddleware,
+    user.deleteUser);
 router.get('/:id/houses', user.getUserWHouseById);
 
 module.exports = router;
