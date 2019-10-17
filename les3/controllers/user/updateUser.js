@@ -1,4 +1,5 @@
 const {userService} = require('../../service');
+const {IdEqualityValidator} = require('../../validator');
 
 module.exports = async (req, res) => {
     try {
@@ -6,11 +7,9 @@ module.exports = async (req, res) => {
         const UserNew = req.body;
         const {id: token_id} = req.user;
 
-        if (+id !== token_id) {
-            throw new Error('It is not your user')
-        }
+        IdEqualityValidator(id, token_id);
 
-        await userService.updateUserService({id}, UserNew);
+        await userService.updateUserService(UserNew, id);
 
         res.json('User was updated');
     } catch (e) {

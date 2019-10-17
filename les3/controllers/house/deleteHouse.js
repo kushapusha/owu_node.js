@@ -1,4 +1,5 @@
 const {houseService} = require('../../service');
+const {IdEqualityValidator} = require('../../validator');
 
 module.exports = async (req, res) => {
     try {
@@ -6,9 +7,7 @@ module.exports = async (req, res) => {
         const {users_id} = req.house;
         const {id: token_id} = req.user;
 
-        if (+users_id !== token_id) {
-            throw new Error('It is not your house')
-        }
+        IdEqualityValidator(users_id, token_id);
 
         await houseService.deleteHouseService({id});
 

@@ -1,9 +1,9 @@
 const db = require('../../database').getInstance();
 
-module.exports = async (id, UserNew) => {
+module.exports = async (UserNew, id) => {
     const UserModel = db.getModel('User');
 
     await UserModel.update(UserNew,
-        {where: id}
+        {where: {id}}
     );
 };

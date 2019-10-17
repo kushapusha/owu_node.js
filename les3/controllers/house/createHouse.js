@@ -2,10 +2,12 @@ const {houseService} = require('../../service');
 
 module.exports = async (req, res) => {
     try {
-        const {city, street, rooms} = req.body;
+        const HouseNew = req.body;
         const {id} = req.user;
 
-        await houseService.createHouseService(city, street, rooms, id);
+        Object.assign(HouseNew, {users_id: id});
+
+        await houseService.createHouseService(HouseNew);
 
         res.json('House was created');
     } catch (e) {
