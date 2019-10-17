@@ -1,14 +1,17 @@
-const db = require('../../database').getInstance();
+const {houseService} = require('../../service');
 
 module.exports = async (req, res) => {
     try {
         const {id} = req.params;
         const HouseNew = req.body;
-        const HouseModel = db.getModel('House');
+        const {users_id} = req.house;
+        const {id: token_id} = req.user;
 
-        await HouseModel.update(HouseNew,
-            {where: {id}}
-        );
+        if (+users_id !== token_id) {
+            throw new Error('It is not your house')
+        }
+
+        await houseService.updateHouseService({id}, HouseNew);
 
         res.json('House was updated');
     } catch (e) {

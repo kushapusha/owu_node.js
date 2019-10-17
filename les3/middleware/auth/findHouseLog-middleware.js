@@ -1,10 +1,10 @@
-const {houseService} = require('../../service');
+const {authService} = require('../../service');
 
 module.exports = async (req, res , next) => {
     try {
         const {street} = req.body;
 
-        const LoginHouse = await houseService.findHouseLogService(street);
+        const LoginHouse = await authService.findHouseLogService(street);
 
         if (!LoginHouse.length) {
             return res.redirect('/houses_register');

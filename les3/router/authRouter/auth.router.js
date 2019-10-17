@@ -1,9 +1,9 @@
 const router = require('express').Router();
 
-const { house, user } = require('../../controllers');
-const { houseMiddleware, userMiddleware } = require('../../middleware');
+const { auth } = require('../../controllers');
+const { authMiddleware } = require('../../middleware');
 
-router.post('/houses', houseMiddleware.findHouseLogMiddleware, house.loginHouse);
-router.post('/users', userMiddleware.findUserLogMiddleware, user.loginUser);
+router.post('/houses', authMiddleware.findHouseLogMiddleware, auth.loginHouse);
+router.post('/users', authMiddleware.findUserLogMiddleware, auth.loginUser);
 
 module.exports = router;

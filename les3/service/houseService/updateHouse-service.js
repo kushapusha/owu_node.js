@@ -4,6 +4,6 @@ module.exports = async (id, HouseNew) => {
     const HouseModel = db.getModel('House');
 
     await HouseModel.update(HouseNew,
-        {where: {id}}
+        {where: id}
     );
 };
