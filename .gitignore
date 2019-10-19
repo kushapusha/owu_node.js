@@ -2,3 +2,4 @@
 /node_modules
 
 !/les3/config/
+les3/config/myData.js
