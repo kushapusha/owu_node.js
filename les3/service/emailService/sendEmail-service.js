@@ -1,5 +1,6 @@
 const mailer = require('nodemailer');
 
+
 module.exports = async email => {
     let transport = mailer.createTransport({
         service: 'gmail',
