@@ -3,5 +3,7 @@ const db = require('../../database').getInstance();
 module.exports = async HouseNew => {
     const HouseModel = db.getModel('House');
 
-    await HouseModel.create(HouseNew);
+    const  house = await HouseModel.create(HouseNew);
+
+    return house && house.dataValues;
 };

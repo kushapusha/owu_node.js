@@ -1,9 +1,12 @@
 const router = require('express').Router();
 
 const { house } = require('../../controllers');
-const { houseMiddleware, accessChecking } = require('../../middleware');
+const { houseMiddleware, accessChecking, filesMiddleware } = require('../../middleware');
 
-router.post('/',  accessChecking.chekAccessTokenMiddleware, house.createHouse);
+router.post('/',
+    // accessChecking.chekAccessTokenMiddleware,
+    filesMiddleware.checkPhotoMiddleware,
+    house.createHouse);
 router.get('/:id', houseMiddleware.isHousePresentMiddleware, house.getByID);
 router.get('/', houseMiddleware.findAllHousesMiddleware,house.findAll);
 router.patch('/:id',

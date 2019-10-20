@@ -1,0 +1,1 @@
+module.exports.uploadHousePhotosService = require('./uploadHousePhotos-service');

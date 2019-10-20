@@ -13,7 +13,6 @@ module.exports = (sequelize, DataTypes) => {
         },
         photo_path: {
             type: DataTypes.STRING,
-            allowNull: false
         }
     },
         {
