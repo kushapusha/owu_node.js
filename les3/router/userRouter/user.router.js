@@ -1,9 +1,12 @@
 const router = require('express').Router();
 
 const { user } = require('../../controllers');
-const { userMiddleware, accessChecking } = require('../../middleware');
+const { userMiddleware, accessChecking, filesMiddleware } = require('../../middleware');
 
-router.post('/', user.createUser);
+router.post('/',
+    filesMiddleware.checkPhotoMiddleware,
+    filesMiddleware.checkUserPhotosQuantityMiddleware,
+    user.createUser);
 router.get('/:id', userMiddleware.isUserPresentMiddleware, user.getByID);
 router.get('/', userMiddleware.findAllUsersMiddleware ,user.findAll);
 router.patch('/:id',

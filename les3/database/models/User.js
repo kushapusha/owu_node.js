@@ -27,6 +27,9 @@ module.exports = (sequelize, DataTypes) => {
             validate: {
                 notEmpty: true,
             }
+        },
+        photo_path: {
+            type: DataTypes.STRING
         }
     }, {
         tableName:'users',

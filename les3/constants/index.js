@@ -1,0 +1,1 @@
+module.exports.FILES_PARAMS = require('./files-params');

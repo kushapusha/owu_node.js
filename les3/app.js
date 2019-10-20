@@ -1,6 +1,8 @@
 const express = require('express');
 const handlebar = require('express-handlebars');
 const path = require('path');
+const {resolve} = require('path');
+const fileupload = require('express-fileupload');
 
 const app = express();
 const db = require('./database').getInstance();
@@ -9,8 +11,12 @@ db.setModels();
 app.listen(3000, ()=>{});
 
 app.use(express.static(path.join(__dirname, 'static')));
+app.use(express.static(resolve(__dirname, 'public')));
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
+app.use(fileupload({}));
+
+global.appRoot = __dirname;
 
 app.engine('.hbs', handlebar({
     extname: '.hbs',
