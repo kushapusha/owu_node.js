@@ -1,5 +1,4 @@
 const express = require('express');
-const handlebar = require('express-handlebars');
 const {resolve} = require('path');
 const fileupload = require('express-fileupload');
 
@@ -27,7 +26,7 @@ app.use('/houses', houseRouter);
 app.use('/auth', authRouter);
 
 app.all('*', (req, res) => {
-    res.render('404');
+    res.status(404);
 });
 
 app.listen(3000, () => {
