@@ -22,7 +22,7 @@ module.exports = async (req, res) => {
 
         await userService.updateUserService({photo_path: `${photoDir}/${photoName}`}, id);
 
-        // await emailService.sendEmailService(UserToCreate.email);
+        await emailService.sendEmailService(UserToCreate.email);
 
         res.json('user created');
     } catch (e) {
