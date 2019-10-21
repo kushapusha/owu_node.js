@@ -16,9 +16,9 @@ module.exports = async (req, res) => {
         const photoExtension = photo.name.split('.').pop();
         const photoName = `${uuid}.${photoExtension}`;
 
-        await fs.mkdirSync(resolve(appRoot,'public', photoDir), {recursive: true});
+        await fs.mkdirSync(resolve(appRoot, 'public', photoDir), {recursive: true});
 
-        await photo.mv(resolve(appRoot, 'public',photoDir, photoName));
+        await photo.mv(resolve(appRoot, 'public', photoDir, photoName));
 
         await userService.updateUserService({photo_path: `${photoDir}/${photoName}`}, id);
 
