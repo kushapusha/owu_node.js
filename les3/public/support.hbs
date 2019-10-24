@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+<button id="btn_to_room">Message to Support</button><br>
+<input type="text" id="name" placeholder="Enter your name" style="display: none"><br>
+<textarea id="message" cols="30" rows="10" placeholder="Hello, please, describe your problem" style="display: none"></textarea><br>
+<button id="btn_send" style="display: none">Send</button>
+
+<script src="/socket.io/socket.io.js"></script>
+
+<script>
+    const socket = io();
+
+    const btn_to_room = document.getElementById('btn_to_room');
+    const name = document.getElementById('name');
+    const message = document.getElementById('message');
+    const btn_send = document.getElementById('btn_send');
+
+    btn_to_room.onclick = () => {
+        message.style.display = 'inline-block';
+        btn_send.style.display = 'inline-block';
+        name.style.display = 'inline-block';
+
+        socket.emit('joinroom', {room_id: 'Support'})
+    };
+
+    btn_send.onclick = () => {
+        socket.emit('message', name.value, message.value)
+    };
+
+    socket.on('chat', (name, data) => {
+        const div = document.createElement('div');
+
+        div.style.border = '2px solid green';
+        div.innerText = `User:${name} \n Message:${data}`;
+
+        document.body.appendChild(div);
+        message.value = '';
+    })
+</script>
+
+</body>
+</html>
