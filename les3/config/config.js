@@ -1,4 +1,4 @@
 module.exports = {
-    jwt_secret: 'jwt_secret',
-    jwt_refresh: 'jwt_refresh'
+    JWT_SECRET: 'jwt_secret',
+    JWT_REFRESH: 'jwt_refresh'
 };

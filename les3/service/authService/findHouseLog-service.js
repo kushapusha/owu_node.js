@@ -1,10 +1,10 @@
 const db = require('../../database').getInstance();
 
-module.exports = async (street) => {
+module.exports = async (city) => {
     const HouseModel = db.getModel('House');
 
-    const LoginHouse = await HouseModel.findOne({
-        where: {street}
+    const LoginHouse = await HouseModel.findAll({
+        where: {city}
     });
 
     return LoginHouse;

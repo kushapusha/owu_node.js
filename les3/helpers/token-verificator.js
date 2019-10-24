@@ -1,11 +1,11 @@
 const jwt = require('jsonwebtoken');
 
-const {jwt_secret} = require('../config/config');
+const {JWT_SECRET} = require('../config/config');
 
 module.exports = token => {
     let user;
 
-    jwt.verify(token, jwt_secret, (err, decoded) => {
+    jwt.verify(token, JWT_SECRET, (err, decoded) => {
         if (err) {
             throw new Error('Token is not valid!')
         }

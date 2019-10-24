@@ -1,4 +1,5 @@
 const {userService} = require('../../service');
+const {notEmptyDataValidator} = require('../../validator');
 
 module.exports = async (req, res, next) => {
     try {
@@ -6,9 +7,7 @@ module.exports = async (req, res, next) => {
 
         const ThisUser = await userService.isUserPresentService(id);
 
-        if (!ThisUser) {
-            return res.redirect('/users_register');
-        }
+        notEmptyDataValidator(ThisUser);
 
         req.user = ThisUser;
         next();

@@ -1,4 +1,5 @@
 const {houseService} = require('../../service');
+const {notEmptyDataValidator} = require('../../validator');
 
 module.exports = async (req, res, next) => {
     try {
@@ -6,9 +7,7 @@ module.exports = async (req, res, next) => {
 
         const ThisHouse = await houseService.isHousePresentService(id);
 
-        if (!ThisHouse) {
-            return res.redirect('/houses_register');
-        }
+        notEmptyDataValidator(ThisHouse);
 
         req.house = ThisHouse;
         next();

@@ -4,11 +4,11 @@ const { house } = require('../../controllers');
 const { houseMiddleware, accessChecking, filesMiddleware } = require('../../middleware');
 
 router.post('/',
-    // accessChecking.chekAccessTokenMiddleware,
+    accessChecking.chekAccessTokenMiddleware,
     filesMiddleware.checkPhotoMiddleware,
     house.createHouse);
 router.get('/:id', houseMiddleware.isHousePresentMiddleware, house.getByID);
-router.get('/', houseMiddleware.findAllHousesMiddleware,house.findAll);
+router.get('/', house.findAll);
 router.patch('/:id',
     accessChecking.chekAccessTokenMiddleware,
     houseMiddleware.isHousePresentMiddleware,

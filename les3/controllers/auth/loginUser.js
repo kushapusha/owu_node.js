@@ -1,12 +1,20 @@
 const {tokinazer} = require('../../helpers');
 
-module.exports = (req, res) => {
+const {notEmptyDataValidator} = require('../../validator');
+const {authService} = require('../../service');
+
+module.exports = async (req, res) => {
     try {
-        const user = req.user;
+        const {email, password} = req.body;
+
+        const user = await authService.findUserLogService(email, password);
+
+        notEmptyDataValidator(user);
+
         const tokens = tokinazer(user);
 
         res.json(tokens);
     } catch (e) {
-        res.json('BAD').status(403)
+        res.status(403).json(e.message)
     }
 };

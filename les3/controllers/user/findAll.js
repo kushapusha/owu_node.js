@@ -1,5 +1,14 @@
-module.exports = (req, res) => {
-    const users = req.user;
+const {userService} = require('../../service');
+const {notEmptyDataValidator} = require('../../validator');
 
-    res.json(users)
+module.exports = async (req, res) => {
+    try {
+        const users = await userService.findAllUsersService();
+
+        notEmptyDataValidator(users);
+
+        res.json(users)
+    } catch (e) {
+        res.status(400).json(e.message)
+    }
 };
