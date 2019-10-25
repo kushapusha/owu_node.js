@@ -9,6 +9,7 @@
 </head>
 <body>
 
+<input type="text" id="room_name" placeholder="What room do you need?"><br>
 <button id="btn_to_room">Message to Support</button>
 <br>
 <input type="text" id="name" placeholder="Enter your name" style="display: none"><br>
@@ -21,6 +22,7 @@
 <script>
     const socket = io();
 
+    const room_name = document.getElementById('room_name');
     const btn_to_room = document.getElementById('btn_to_room');
     const name = document.getElementById('name');
     const message = document.getElementById('message');
@@ -31,7 +33,7 @@
         btn_send.style.display = 'inline-block';
         name.style.display = 'inline-block';
 
-        socket.emit('joinroom', {room_id: 'Support'})
+        socket.emit('joinroom', {room_id: room_name.value})
     };
 
     btn_send.onclick = () => {

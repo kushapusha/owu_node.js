@@ -15,8 +15,8 @@ io.on('connection', socket => {
         socket.join(data.room_id);
     });
 
-    socket.on('message', (name, data) => {
-        io.to('Support').emit('chat', name, data);
+    socket.on('message', (room, name, data) => {
+        io.to(`${room.room_id}`).emit('chat', name, data);
     })
 });
 
